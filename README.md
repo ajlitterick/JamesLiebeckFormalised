@@ -1,13 +1,32 @@
-# JamesLiebeckFormalised
+# Formalization of James & Liebeck's "Representations and Characters of Groups"
 
-## GitHub configuration
+## Goal
+Systematically formalize results from Gordon James and Martin Liebeck's *Representations and Characters of Groups*, Second Edition (2003).
 
-To set up your new GitHub repository, follow these steps:
+## Approach
+- Follow the textbook linearly
+- Use existing mathlib results where available (noted in comments)
+- Formalize all major theorems and representative examples
+- Skip or simplify some routine calculations where appropriate
 
-* Under your repository name, click **Settings**.
-* In the **Actions** section of the sidebar, click "General".
-* Check the box **Allow GitHub Actions to create and approve pull requests**.
-* Click the **Pages** section of the settings sidebar.
-* In the **Source** dropdown menu, select "GitHub Actions".
+## Progress
 
-After following the steps above, you can remove this section from the README file.
+### Chapter 1: Groups and homomorphism
+- Work in progress
+
+### Chapters 2-32
+- Not yet started
+
+### Solutions to Exercises
+- Not yet started
+
+## Mathlib Dependencies
+- Will summarise key defintions/theorems used from mathlib as we progress
+
+## Departures from Textbook
+
+- Any deviations from James & Liebeck will be documented here.
+
+## Notes for Lean Learners
+
+- Common patterns used in the formalisation will be documented here.
