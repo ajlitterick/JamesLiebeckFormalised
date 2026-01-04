@@ -10,15 +10,15 @@ import Mathlib.GroupTheory.Perm.Basic
 
 variable {G : Type*} [Group G]
 variable (g h k : G)
+variable (n : ℕ+)
 
 -- A group consists of a set $G$ together with a rule for
 -- combining any two elements $g$, $h$ of $G$ to form another
 -- element of $G$, written $gh$; this rule must satisfy the
--- following axioms:
+-- following axioms
 
 -- (1) for all $g$, $h$, $k$ in $G$, $(gh)k = g(hk)$.
-example : (g*h)*k = g*(h*k) :=
-  mul_assoc _ _ _
+example : (g*h)*k = g*(h*k) := mul_assoc _ _ _
 
 -- (2) there exists an element $e$ in $G$ such that for
 -- all $g in $G$, $eg = ge = g$
@@ -38,10 +38,9 @@ example : ∃ h : G, g * h = 1 ∧ h * g = 1 :=
   complex numbers, is a group of order n.
 -/
 
-variable (n : ℕ+)
 #check rootsOfUnity n ℂ
 #check Complex.card_rootsOfUnity n
-example (n : ℕ+) : IsCyclic (rootsOfUnity n ℂ) := inferInstance
+example : IsCyclic (rootsOfUnity n ℂ) := inferInstance
 
 -- If a = e^(2πi/n) then Cₙ = {1, a, a^2, ..., a^(n-1) } and a^n = 1.
 #check Complex.mem_rootsOfUnity n -- Mathlib built-in equivalence
@@ -63,17 +62,28 @@ example : AddGroup ℤ := Int.instAddGroup
 
   Note 2: The book has functions acting on the right, so that fg means
   'first do f, then do g.' With apologies to Gordon and Martin, this is a
-  uniquely 20th-century group theory phenomenon and has no place here.
+  20th-century group theory phenomenon and has no place here.
   Mathlib uses left actions throughout, so that fg means 'first do g, then do f.'
 -/
 
-example (n : ℕ) : Group (DihedralGroup n) := DihedralGroup.instGroup
-#check DihedralGroup.instGroup.mul_assoc  -- associativity
-#check DihedralGroup.instGroup.one_mul    -- identity
-#check DihedralGroup.instGroup.inv_mul_cancel -- inverses
+section
+open DihedralGroup
+variable (i j : ZMod n)
+example : Group (DihedralGroup n) := instGroup
+
+#check r i -- DihedralGroup.r for rotations
+#check sr i -- DihedralGroup.sr for reflections
+
+example : (sr i) * (sr i)= 1 := by
+  rw [sr_mul_sr, sub_self, r_zero]
+
+#check instGroup.mul_assoc  -- associativity
+#check instGroup.one_mul    -- identity
+#check instGroup.inv_mul_cancel -- inverses
 
 example : Fintype.card (DihedralGroup n) = 2 * n := DihedralGroup.card
 
+end
 /-
   (4) For n a positive integer, the set of all permutations of {1,2,...,n},
   under the product operation of composition, is a group. It is called the
@@ -83,5 +93,5 @@ example : Fintype.card (DihedralGroup n) = 2 * n := DihedralGroup.card
 -- Mathlib defines Sₙ as the type of equivalences from a type to itself, i.e. Equiv.Perm (Fin n)
 
 -- The order of Sₙ is n!.
-example (n : ℕ) : Fintype.card (Equiv.Perm (Fin n)) = Nat.factorial n := by
+example : Fintype.card (Equiv.Perm (Fin n)) = Nat.factorial n := by
   rw [Fintype.card_perm, Fintype.card_fin]
