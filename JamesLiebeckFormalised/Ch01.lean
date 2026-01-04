@@ -95,3 +95,13 @@ end
 -- The order of Sₙ is n!.
 example : Fintype.card (Equiv.Perm (Fin n)) = Nat.factorial n := by
   rw [Fintype.card_perm, Fintype.card_fin]
+
+/- (5) Let F be either ℝ (the set of real numbers) or ℂ (the set of
+complex numbers). The set of all invertible n × n matrices with entries
+in F, under matrix multiplication, forms a group. This group is called
+the general linear group of degree n over F, and is denoted by
+GL(n, F). It is an infinite group. The identity of GL(n, F) is of course
+the identity matrix, which we denote by Iₙ or just I.
+A group G is said to be abelian if gh = hg for all g and h in G.
+While Cₙ and ℤ are abelian, most of the other examples given above
+are non-abelian groups. -/
